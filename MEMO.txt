@@ -125,6 +125,11 @@
  $ git remote add origin https://github.com/devg1120/mynote.git
  $ git push -u origin main
 
+# GITHUB PAGES SETTING
+
+  setting > Pges 
+    Source : Branch:main    /docs
+
 # OPEN BROWSER
 
   https://devg1120.github.io/mynote/
