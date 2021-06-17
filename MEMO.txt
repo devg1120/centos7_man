@@ -14,8 +14,8 @@
 
 # INIT
 
- $ mkdir mynote
- $ cd mynote
+ $ mkdir centos7_man
+ $ cd centos7_man
  $ sphinx-quickstart
    ...
    > Separate source and build directories (y/n) [n]: y
@@ -46,7 +46,7 @@
 ---
 
 
- mynote>
+ centos7_man>
 │
 │  .gitignore
 │  make.bat
@@ -112,7 +112,7 @@
     ├─_static
     └─_templates
 
- mynote>
+ centos7_man>
 
 
 ---
@@ -122,7 +122,7 @@
  $ git add -A
  $ git commit -m "update"
  $ git branch -M main
- $ git remote add origin https://github.com/devg1120/mynote.git
+ $ git remote add origin https://github.com/devg1120/centos7_man.git
  $ git push -u origin main
 
 # GITHUB PAGES SETTING
@@ -132,6 +132,6 @@
 
 # OPEN BROWSER
 
-  https://devg1120.github.io/mynote/
+  https://devg1120.github.io/centos7_man/
  
- file:///C:/DOC/mynote/docs/index.html
+ file:///C:/DOC/centos7_man/docs/index.html
