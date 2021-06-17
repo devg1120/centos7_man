@@ -1,0 +1,132 @@
+
+ ref
+ https://qiita.com/tutuz/items/88a32d94d700b33dc3ea
+ 
+
+# INSTALL
+
+ $ python --version
+ Python 3.7.3
+
+ $ pip install sphinx
+ $ pip install sphinx_rtd_theme
+
+
+# INIT
+
+ $ mkdir mynote
+ $ cd mynote
+ $ sphinx-quickstart
+   ...
+   > Separate source and build directories (y/n) [n]: y
+   ...
+   
+   
+# BASE ENV FILE & SCRIPT MODIFY
+
+ make.bat
+     |set SOURCEDIR=source
+     |set BUILDDIR=docs
+
+ Makefaile
+     |SOURCEDIR     = source
+     |BUILDDIR      = docs
+
+ source/conf.py
+ 
+   import sphinx_rtd_theme
+   html_theme = 'sphinx_rtd_theme'
+   html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+
+# MAKE HTML
+
+ $ make html
+   ... docs folder output
+---
+
+
+ mynote>
+│
+│  .gitignore
+│  make.bat
+│  Makefile
+│  MEMO.txt
+│
+├─docs
+│  │  .buildinfo
+│  │  .nojekyll
+│  │  code.html
+│  │  genindex.html
+│  │  hello.html
+│  │  hierarchy.html
+│  │  index.html
+│  │  objects.inv
+│  │  other.html
+│  │  search.html
+│  │  searchindex.js
+│  │
+│  ├─.doctrees
+│  │      code.doctree
+│  │      environment.pickle
+│  │      hello.doctree
+│  │      hierarchy.doctree
+│  │      index.doctree
+│  │      other.doctree
+│  │
+│  ├─_sources
+│  │      code.rst.txt
+│  │      hello.rst.txt
+│  │      hierarchy.rst.txt
+│  │      index.rst.txt
+│  │      other.rst.txt
+│  │
+│  └─_static
+│          background_b01.png
+│          basic.css
+│          bizstyle.css
+│          bizstyle.js
+│          css3-mediaqueries.js
+│          css3-mediaqueries_src.js
+│          doctools.js
+│          documentation_options.js
+│          file.png
+│          jquery-3.5.1.js
+│          jquery.js
+│          language_data.js
+│          minus.png
+│          plus.png
+│          pygments.css
+│          searchtools.js
+│          underscore-1.12.0.js
+│          underscore.js
+│
+└─source
+    │  code.rst
+    │  conf.py
+    │  hello.rst
+    │  hierarchy.rst
+    │  index.rst
+    │  other.rst
+    │
+    ├─_static
+    └─_templates
+
+ mynote>
+
+
+---
+
+# GITHUB PUSH
+
+ $ git add -A
+ $ git commit -m "update"
+ $ git branch -M main
+ $ git remote add origin https://github.com/devg1120/mynote.git
+ $ git push -u origin main
+
+# OPEN BROWSER
+
+  https://devg1120.github.io/mynote/
+ 
+ file:///C:/DOC/mynote/docs/index.html
