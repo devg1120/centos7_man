@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>firewalld環境設定 &mdash; mynote  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="This page is about Basic syntax" href="../1.chapter/basic_syntax.html" />
+    <link rel="prev" title="ネットワーク環境設定" href="../_1.chapter/network.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mynote
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../_1.chapter/network.html">ネットワーク環境設定</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">firewalld環境設定</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">基本操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">サービス自動起動の有効化/無効化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">サービス起動/停止/状態確認</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">ゾーン操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">アクティブゾーンの確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">デフォルトゾーンの確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#active">Activeゾーンポリシーの確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">任意のゾーン設定の確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">ゾーンの新規追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">インターフェイスの割り当てゾーン変更</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">ゾーンへサービスを追加/削除</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">サービスの操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">指定できるサービス一覧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">サービス定義ファイル</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">サービスの新規追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">サービスの削除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">ゾーンの設定確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">ゾーンへの許可サービスの追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">ゾーンへの許可サービスの削除</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">ポート番号の操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id20">ポート番号と名前の紐づけ定義ファイル</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">ポート番号設定の確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">許可ポート番号の追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">許可ポート番号の削除</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ip">ソースIPアドレスの操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id24">ソースIPアドレス設定の確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">許可ソースIPアドレスの追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">拒否ソースIPアドレスの追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">許可/拒否IPアドレスの削除</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#output">OUTPUTダイレクトルール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">現行設定の確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">ダイレクトルールの追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">ダイレクトルールの削除</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../1.chapter/basic_syntax.html">This page is about Basic syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.chapter/roles.html">This page is about Roles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.chapter/directive.html">This page is about Directive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.chapter/others.html">Others</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mynote</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>firewalld環境設定</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_2.chapter/firewalld.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="firewalld">
+<h1>firewalld環境設定<a class="headerlink" href="#firewalld" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li><p>インバウンド通信／アウトバウンド通信</p></li>
+</ol>
+<ul class="simple">
+<li><dl class="simple">
+<dt>インバウンド通信(以下、INPUT)</dt><dd><p>外部から内部への通信のことです。(外から来る通信)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>アウトバウンド通信(以下、OUTPUT)</dt><dd><p>内部から外部への通信のことです。(外に出る通信)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>firewalldでは、ゾーンに対してはINPUTの設定となるため、OUTPUTの設定は行えません。
+そのため、OUTPUTの設定はiptablesダイレクトルールを利用する必要があります。</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>ゾーン</p></li>
+</ol>
+<ul class="simple">
+<li><dl class="simple">
+<dt>drop</dt><dd><p>全てのパケットを破棄する。内部から外部へのパケットは許可されるが、返信されてきたパケットも破棄してしまうので実質的に通信不可となる。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>block</dt><dd><p>外部からのパケットは基本的に破棄される。内部からの通信パケットの返信は許可されるようになっている。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>public</dt><dd><p>デフォルトでは「ssh」と「dhcpv6-client」のみ許可されている。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>external</dt><dd><p>デフォルトでは「ssh」のみ許可される。ipマスカレードが有効になる。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>dmz</dt><dd><p>デフォルトでは「ssh」のみ許可されている。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>work</dt><dd><p>デフォルトでは「dhcpv6-client」と「ipp-client」、「 ssh」が許可される。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>home</dt><dd><p>デフォルトでは「dhcpv6-client」と「ipp-client」と「mdns」と「samba-client」、「ssh」が許可される。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>internal</dt><dd><p>デフォルトでは「dhcpv6-client」と「ipp-client」と「mdns」と「samba-client」、「ssh」が許可される。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>trusted</dt><dd><p>全てのパケットが許可される。</p>
+</dd>
+</dl>
+</li>
+</ul>
+<section id="id1">
+<h2>基本操作<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<section id="id2">
+<h3>サービス自動起動の有効化/無効化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># systemctl enable firewalld.service</span>
+<span class="c1"># systemctl disable firewalld.service</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>サービス起動/停止/状態確認<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># systemctl start firewalld.service</span>
+<span class="c1"># systemctl stop firewalld.service</span>
+<span class="c1"># systemctl status firewalld.service</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id4">
+<h2>ゾーン操作<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<section id="id5">
+<h3>アクティブゾーンの確認<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --get-active-zones</span>
+
+<span class="n">public</span>
+ <span class="n">interfaces</span><span class="p">:</span> <span class="n">enp0s3</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>デフォルトゾーンの確認<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --get-default-zone</span>
+
+<span class="n">public</span>
+</pre></div>
+</div>
+</section>
+<section id="active">
+<h3>Activeゾーンポリシーの確認<a class="headerlink" href="#active" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --list-all</span>
+
+<span class="n">public</span> <span class="p">(</span><span class="n">active</span><span class="p">)</span>
+  <span class="n">target</span><span class="p">:</span> <span class="n">default</span>
+  <span class="n">icmp</span><span class="o">-</span><span class="n">block</span><span class="o">-</span><span class="n">inversion</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">interfaces</span><span class="p">:</span> <span class="n">enp0s3</span>
+  <span class="n">sources</span><span class="p">:</span>
+  <span class="n">services</span><span class="p">:</span> <span class="n">dhcpv6</span><span class="o">-</span><span class="n">client</span> <span class="n">ssh</span>
+  <span class="n">ports</span><span class="p">:</span> <span class="mi">514</span><span class="o">/</span><span class="n">tcp</span>
+  <span class="n">protocols</span><span class="p">:</span>
+  <span class="n">masquerade</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">forward</span><span class="o">-</span><span class="n">ports</span><span class="p">:</span>
+  <span class="n">source</span><span class="o">-</span><span class="n">ports</span><span class="p">:</span>
+  <span class="n">icmp</span><span class="o">-</span><span class="n">blocks</span><span class="p">:</span>
+  <span class="n">rich</span> <span class="n">rules</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>任意のゾーン設定の確認<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --zone=block --list-all</span>
+
+<span class="n">block</span>
+  <span class="n">target</span><span class="p">:</span> <span class="o">%%</span><span class="n">REJECT</span><span class="o">%%</span>
+  <span class="n">icmp</span><span class="o">-</span><span class="n">block</span><span class="o">-</span><span class="n">inversion</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">interfaces</span><span class="p">:</span>
+  <span class="n">sources</span><span class="p">:</span>
+  <span class="n">services</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="n">protocols</span><span class="p">:</span>
+  <span class="n">masquerade</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">forward</span><span class="o">-</span><span class="n">ports</span><span class="p">:</span>
+  <span class="n">source</span><span class="o">-</span><span class="n">ports</span><span class="p">:</span>
+  <span class="n">icmp</span><span class="o">-</span><span class="n">blocks</span><span class="p">:</span>
+  <span class="n">rich</span> <span class="n">rules</span><span class="p">:</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --list-all-zones</span>
+<span class="n">すべてのゾーン</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>ゾーンの新規追加<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --new-zone Original --permanent</span>
+<span class="n">success</span>
+
+<span class="c1"># firewall-cmd --reload</span>
+<span class="n">success</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># firewall-cmd --add-service=ssh --zone=OriginalZ --permanent
+success
+
+# cat /etc/firewalld/zones/Original.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;zone&gt;
+&lt;service name=&quot;ssh&quot;/&gt;
+&lt;/zone&gt;
+
+# firewall-cmd --reload
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --list-all --zone=Original</span>
+<span class="n">Original</span>
+  <span class="n">target</span><span class="p">:</span> <span class="n">default</span>
+  <span class="n">icmp</span><span class="o">-</span><span class="n">block</span><span class="o">-</span><span class="n">inversion</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">interfaces</span><span class="p">:</span>
+  <span class="n">sources</span><span class="p">:</span>
+  <span class="n">services</span><span class="p">:</span> <span class="n">ssh</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="n">protocols</span><span class="p">:</span>
+  <span class="n">masquerade</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">forward</span><span class="o">-</span><span class="n">ports</span><span class="p">:</span>
+  <span class="n">source</span><span class="o">-</span><span class="n">ports</span><span class="p">:</span>
+  <span class="n">icmp</span><span class="o">-</span><span class="n">blocks</span><span class="p">:</span>
+  <span class="n">rich</span> <span class="n">rules</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h3>インターフェイスの割り当てゾーン変更<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --zone=trusted --change-interface=enp0s3</span>
+<span class="c1"># nmcli connection modify enp0s3 connection.zone internal　--permanent</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># cat /etc/sysconfig/network-scripts/ifcfg-enp0s3</span>
+<span class="n">TYPE</span><span class="o">=</span><span class="n">Ethernet</span>
+<span class="n">PROXY_METHOD</span><span class="o">=</span><span class="n">none</span>
+<span class="n">BROWSER_ONLY</span><span class="o">=</span><span class="n">no</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
+<span class="n">DEFROUTE</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="o">=</span><span class="n">no</span>
+<span class="n">IPV6INIT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV6_AUTOCONF</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV6_DEFROUTE</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="o">=</span><span class="n">no</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="o">=</span><span class="n">stable</span><span class="o">-</span><span class="n">privacy</span>
+<span class="n">NAME</span><span class="o">=</span><span class="n">enp0s3</span>
+<span class="n">UUID</span><span class="o">=</span><span class="n">e08ab9aa</span><span class="o">-</span><span class="mi">6</span><span class="n">ae3</span><span class="o">-</span><span class="mi">496</span><span class="n">b</span><span class="o">-</span><span class="mi">80</span><span class="n">a6</span><span class="o">-</span><span class="mi">13</span><span class="n">b7af76b852</span>
+<span class="n">DEVICE</span><span class="o">=</span><span class="n">enp0s3</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPADDR</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">2.5</span>
+<span class="n">PREFIX</span><span class="o">=</span><span class="mi">24</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>ゾーンへサービスを追加/削除<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --zone=public --add-service=http  --permanent</span>
+<span class="c1"># firewall-cmd --zone=public --remove-service =http  --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id11">
+<h2>サービスの操作<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<section id="id12">
+<h3>指定できるサービス一覧<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --get-services</span>
+
+<span class="n">RH</span><span class="o">-</span><span class="n">Satellite</span><span class="o">-</span><span class="mi">6</span> <span class="n">RH</span><span class="o">-</span><span class="n">Satellite</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">capsule</span> <span class="n">amanda</span><span class="o">-</span><span class="n">client</span>
+<span class="n">amanda</span><span class="o">-</span><span class="n">k5</span><span class="o">-</span><span class="n">client</span> <span class="n">amqp</span> <span class="n">amqps</span> <span class="n">apcupsd</span> <span class="n">audit</span> <span class="n">bacula</span> <span class="n">bacula</span><span class="o">-</span><span class="n">client</span>
+<span class="n">bgp</span> <span class="n">bitcoin</span> <span class="n">bitcoin</span><span class="o">-</span><span class="n">rpc</span> <span class="n">bitcoin</span><span class="o">-</span><span class="n">testnet</span> <span class="n">bitcoin</span><span class="o">-</span><span class="n">testnet</span><span class="o">-</span><span class="n">rpc</span>
+<span class="n">ceph</span> <span class="n">ceph</span><span class="o">-</span><span class="n">mon</span> <span class="n">cfengine</span> <span class="n">condor</span><span class="o">-</span><span class="n">collector</span> <span class="n">ctdb</span> <span class="n">dhcp</span> <span class="n">dhcpv6</span> <span class="n">dhcpv6</span><span class="o">-</span><span class="n">client</span>
+<span class="n">distcc</span> <span class="n">dns</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="n">docker</span><span class="o">-</span><span class="n">swarm</span> <span class="n">dropbox</span><span class="o">-</span><span class="n">lansync</span> <span class="n">elasticsearch</span>
+<span class="n">etcd</span><span class="o">-</span><span class="n">client</span> <span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="n">finger</span> <span class="n">freeipa</span><span class="o">-</span><span class="n">ldap</span> <span class="n">freeipa</span><span class="o">-</span><span class="n">ldaps</span> <span class="n">freeipa</span><span class="o">-</span><span class="n">replication</span> <span class="n">freeipa</span><span class="o">-</span><span class="n">trust</span>
+<span class="n">ftp</span> <span class="n">ganglia</span><span class="o">-</span><span class="n">client</span> <span class="n">ganglia</span><span class="o">-</span><span class="n">master</span> <span class="n">git</span> <span class="n">gre</span> <span class="n">high</span><span class="o">-</span><span class="n">availability</span>
+<span class="n">http</span> <span class="n">https</span> <span class="n">imap</span> <span class="n">imaps</span> <span class="n">ipp</span> <span class="n">ipp</span><span class="o">-</span><span class="n">client</span> <span class="n">ipsec</span> <span class="n">irc</span> <span class="n">ircs</span> <span class="n">iscsi</span><span class="o">-</span><span class="n">target</span>
+<span class="n">isns</span> <span class="n">jenkins</span> <span class="n">kadmin</span> <span class="n">kerberos</span> <span class="n">kibana</span> <span class="n">klogin</span> <span class="n">kpasswd</span> <span class="n">kprop</span> <span class="n">kshell</span>
+<span class="n">ldap</span> <span class="n">ldaps</span> <span class="n">libvirt</span> <span class="n">libvirt</span><span class="o">-</span><span class="n">tls</span> <span class="n">lightning</span><span class="o">-</span><span class="n">network</span> <span class="n">llmnr</span> <span class="n">managesieve</span>
+<span class="n">matrix</span> <span class="n">mdns</span> <span class="n">minidlna</span> <span class="n">mongodb</span> <span class="n">mosh</span> <span class="n">mountd</span> <span class="n">mqtt</span> <span class="n">mqtt</span><span class="o">-</span><span class="n">tls</span> <span class="n">ms</span><span class="o">-</span><span class="n">wbt</span> <span class="n">mssql</span>
+<span class="n">murmur</span> <span class="n">mysql</span> <span class="n">nfs</span> <span class="n">nfs3</span> <span class="n">nmea</span><span class="o">-</span><span class="mi">0183</span> <span class="n">nrpe</span> <span class="n">ntp</span> <span class="n">nut</span> <span class="n">openvpn</span> <span class="n">ovirt</span><span class="o">-</span><span class="n">imageio</span>
+<span class="n">ovirt</span><span class="o">-</span><span class="n">storageconsole</span> <span class="n">ovirt</span><span class="o">-</span><span class="n">vmconsole</span> <span class="n">plex</span> <span class="n">pmcd</span> <span class="n">pmproxy</span> <span class="n">pmwebapi</span> <span class="n">pmwebapis</span>
+<span class="n">pop3</span> <span class="n">pop3s</span> <span class="n">postgresql</span> <span class="n">privoxy</span> <span class="n">proxy</span><span class="o">-</span><span class="n">dhcp</span> <span class="n">ptp</span> <span class="n">pulseaudio</span> <span class="n">puppetmaster</span>
+<span class="n">quassel</span> <span class="n">radius</span> <span class="n">redis</span> <span class="n">rpc</span><span class="o">-</span><span class="n">bind</span> <span class="n">rsh</span> <span class="n">rsyncd</span> <span class="n">rtsp</span> <span class="n">salt</span><span class="o">-</span><span class="n">master</span> <span class="n">samba</span> <span class="n">samba</span><span class="o">-</span><span class="n">client</span> <span class="n">samba</span><span class="o">-</span><span class="n">dc</span>
+<span class="n">sane</span> <span class="n">sip</span> <span class="n">sips</span> <span class="n">slp</span> <span class="n">smtp</span> <span class="n">smtp</span><span class="o">-</span><span class="n">submission</span> <span class="n">smtps</span> <span class="n">snmp</span> <span class="n">snmptrap</span> <span class="n">spideroak</span><span class="o">-</span><span class="n">lansync</span>
+<span class="n">squid</span> <span class="n">ssh</span> <span class="n">steam</span><span class="o">-</span><span class="n">streaming</span> <span class="n">svdrp</span> <span class="n">svn</span> <span class="n">syncthing</span> <span class="n">syncthing</span><span class="o">-</span><span class="n">gui</span> <span class="n">synergy</span> <span class="n">syslog</span> <span class="n">syslog</span><span class="o">-</span><span class="n">tls</span>
+<span class="n">telnet</span> <span class="n">tftp</span> <span class="n">tftp</span><span class="o">-</span><span class="n">client</span> <span class="n">tinc</span> <span class="n">tor</span><span class="o">-</span><span class="n">socks</span> <span class="n">transmission</span><span class="o">-</span><span class="n">client</span> <span class="n">upnp</span><span class="o">-</span><span class="n">client</span> <span class="n">vdsm</span> <span class="n">vnc</span><span class="o">-</span><span class="n">server</span>
+<span class="n">wbem</span><span class="o">-</span><span class="n">http</span> <span class="n">wbem</span><span class="o">-</span><span class="n">https</span> <span class="n">wsman</span> <span class="n">wsmans</span> <span class="n">xdmcp</span> <span class="n">xmpp</span><span class="o">-</span><span class="n">bosh</span> <span class="n">xmpp</span><span class="o">-</span><span class="n">client</span> <span class="n">xmpp</span><span class="o">-</span><span class="n">local</span> <span class="n">xmpp</span><span class="o">-</span><span class="n">server</span>
+<span class="n">zabbix</span><span class="o">-</span><span class="n">agent</span> <span class="n">zabbix</span><span class="o">-</span><span class="n">server</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>サービス定義ファイル<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ftpサービス
+
+# cat /usr/lib/firewalld/services/ftp.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;service&gt;
+  &lt;short&gt;FTP&lt;/short&gt;
+  &lt;description&gt;FTP is a protocol used for remote file transfer. If you plan to make your FTP server publicly available, enable this option. You need the vsftpd package installed for this option to be useful.&lt;/description&gt;
+  &lt;port protocol=&quot;tcp&quot; port=&quot;21&quot;/&gt;
+  &lt;module name=&quot;nf_conntrack_ftp&quot;/&gt;
+&lt;/service&gt;
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>サービスの新規追加<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># firewall-cmd --permanent --new-service hoge
+
+# cat /etc/firewalld/services/hoge.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;service&gt;
+&lt;/service&gt;
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h3>サービスの削除<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --permanent --delete-service=hoge</span>
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h3>ゾーンの設定確認<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --list-services --zone=public</span>
+<span class="c1"># firewall-cmd --list-services --zone=public --permanent</span>
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h3>ゾーンへの許可サービスの追加<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --add-service=ftp --zone=public</span>
+<span class="c1"># firewall-cmd --add-service=ftp --zone=public --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+<section id="id18">
+<h3>ゾーンへの許可サービスの削除<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --remove-service=ftp --zone=public</span>
+<span class="c1"># firewall-cmd --remove-service=ftp --zone=public --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id19">
+<h2>ポート番号の操作<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<section id="id20">
+<h3>ポート番号と名前の紐づけ定義ファイル<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># cat /etc/services | grep postgres</span>
+
+<span class="n">postgres</span>        <span class="mi">5432</span><span class="o">/</span><span class="n">tcp</span>        <span class="n">postgresql</span>      <span class="c1"># POSTGRES</span>
+<span class="n">postgres</span>        <span class="mi">5432</span><span class="o">/</span><span class="n">udp</span>        <span class="n">postgresql</span>      <span class="c1"># POSTGRES</span>
+</pre></div>
+</div>
+</section>
+<section id="id21">
+<h3>ポート番号設定の確認<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --list-ports --zone=public</span>
+
+<span class="mi">514</span><span class="o">/</span><span class="n">tcp</span>
+
+<span class="c1"># firewall-cmd --list-ports --zone=public --permanent</span>
+
+<span class="mi">514</span><span class="o">/</span><span class="n">tcp</span>
+</pre></div>
+</div>
+</section>
+<section id="id22">
+<h3>許可ポート番号の追加<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --add-port=postgres/tcp --add-port=60000/udp</span>
+<span class="c1"># firewall-cmd --add-port=postgres/tcp --add-port=60000/udp --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h3>許可ポート番号の削除<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --remove-port=postgres/tcp --remove-port=60000/udp</span>
+<span class="c1"># firewall-cmd --remove-port=8080/tcp --remove-port=60000/udp --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ip">
+<h2>ソースIPアドレスの操作<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
+<section id="id24">
+<h3>ソースIPアドレス設定の確認<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --list-sources --zone=public</span>
+<span class="c1"># firewall-cmd --list-sources --zone=public --permanent</span>
+</pre></div>
+</div>
+</section>
+<section id="id25">
+<h3>許可ソースIPアドレスの追加<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --add-source=192.168.0.0/24 --zone=public</span>
+<span class="c1"># firewall-cmd --add-source=192.168.0.0/24 --zone=public --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+<section id="id26">
+<h3>拒否ソースIPアドレスの追加<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --add-source=192.168.11.0/24 --zone=drop</span>
+<span class="c1"># firewall-cmd --add-source=192.168.11.0/24 --zone=drop --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+<section id="id27">
+<h3>許可/拒否IPアドレスの削除<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --remove-source=192.168.11.0/24 --zone=drop</span>
+<span class="c1"># firewall-cmd --remove-source=192.168.11.0/24 --zone=drop --permanent</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="output">
+<h2>OUTPUTダイレクトルール<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<section id="id28">
+<h3>現行設定の確認<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --direct --get-all-rules</span>
+<span class="c1"># firewall-cmd --direct --get-all-rules --permanent</span>
+</pre></div>
+</div>
+</section>
+<section id="id29">
+<h3>ダイレクトルールの追加<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --direct --add-rule ipv4 filter OUTPUT 0 -m state --state NEW -d 192.168.11.2 -j DROP</span>
+<span class="c1"># firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -m state --state NEW -d 192.168.11.2 -j DROP</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+<section id="id30">
+<h3>ダイレクトルールの削除<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># firewall-cmd --direct --remove-rule ipv4 filter OUTPUT 0 -m state --state NEW -d 192.168.11.2 -j DROP</span>
+<span class="c1"># firewall-cmd --permanent --direct --remove-rule ipv4 filter OUTPUT 0 -m state --state NEW -d 192.168.11.2 -j DROP</span>
+<span class="c1"># firewall-cmd --reload</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../1.chapter/basic_syntax.html" class="btn btn-neutral float-right" title="This page is about Basic syntax" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../_1.chapter/network.html" class="btn btn-neutral float-left" title="ネットワーク環境設定" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, devg1120.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

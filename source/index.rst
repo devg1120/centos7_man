@@ -12,8 +12,11 @@ CentOS7 manual
    :caption: 目次
 
    _1.chapter/network
+   _2.chapter/firewalld
    1.chapter/basic_syntax
    1.chapter/roles
    2.chapter/directive
    3.chapter/others
+   
+   
    
