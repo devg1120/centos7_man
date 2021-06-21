@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ネットワーク環境設定 &mdash; mynote  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="This page is about Basic syntax" href="../1.chapter/basic_syntax.html" />
+    <link rel="prev" title="CentOS7 manual" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mynote
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ネットワーク環境設定</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">デバイス接続レイヤの操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">接続プロファイル一覧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">デバイス一覧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">接続プロファイルの接続と切断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">デバイスの接続と切断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">接続プロファイル追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">接続プロファイル削除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ip">IPレイヤ環境の設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-scripts">network-scripts確認</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">IPネットワークレイヤの操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-centos6-centos7">NETWORKコマンド(CentOS6/CentOS7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">リンク状態の確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">リンクの接続と切断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">ルーティングテーブルの確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">デフォルトゲートウェイの追加、削除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">デバイスごとのパケット処理数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcp">TCPソケットの状態確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arp">ARPテーブルの確認</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../1.chapter/basic_syntax.html">This page is about Basic syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.chapter/roles.html">This page is about Roles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.chapter/directive.html">This page is about Directive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.chapter/others.html">Others</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mynote</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ネットワーク環境設定</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_1.chapter/network.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="id1">
+<h1>ネットワーク環境設定<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<section id="id2">
+<h2>デバイス接続レイヤの操作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<section id="id3">
+<h3>接続プロファイル一覧<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># nmcli connection</span>
+<span class="c1"># nmcli c</span>
+
+<span class="n">NAME</span>    <span class="n">UUID</span>                                  <span class="n">TYPE</span>      <span class="n">DEVICE</span>
+<span class="n">eth0</span>    <span class="n">dc175057</span><span class="o">-</span><span class="mi">25</span><span class="n">d3</span><span class="o">-</span><span class="mi">4817</span><span class="o">-</span><span class="n">a66f</span><span class="o">-</span><span class="n">dd59a81913c4</span>  <span class="n">ethernet</span>  <span class="n">enp0s3</span>
+</pre></div>
+</div>
+<p>※ NAME/DEVICE 同一名である必要はない</p>
+</section>
+<section id="id4">
+<h3>デバイス一覧<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># nmcli device</span>
+<span class="c1"># nmcli d</span>
+
+<span class="n">DEVICE</span>  <span class="n">TYPE</span>      <span class="n">STATE</span>     <span class="n">CONNECTION</span>
+<span class="n">enp0s3</span>  <span class="n">ethernet</span>  <span class="n">接続済み</span>  <span class="n">eth0</span>
+<span class="n">lo</span>      <span class="n">loopback</span>  <span class="n">管理無し</span>  <span class="o">--</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>接続プロファイルの接続と切断<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">up</span><span class="o">|</span><span class="n">down</span> <span class="s1">&#39;接続プロファイル名&#39;</span>
+
+<span class="c1"># nmcli c down enp0s3</span>
+
+<span class="c1"># nmcli c up enp0s3</span>
+                <span class="n">enp0s3</span><span class="p">:</span><span class="n">接続名</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>デバイスの接続と切断<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">device</span> <span class="n">connect</span> <span class="n">connect</span><span class="o">|</span><span class="n">disconnect</span> <span class="s1">&#39;デバイス名&#39;</span>
+
+ <span class="p">(</span><span class="n">例</span><span class="p">)</span> <span class="n">nmcli</span> <span class="n">d</span> <span class="n">c</span> <span class="n">disconnect</span> <span class="n">enp5s0</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>接続プロファイル追加<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">add</span> <span class="nb">type</span> <span class="s1">&#39;タイプ名&#39;</span> <span class="n">ifname</span> <span class="s1">&#39;デバイス名&#39;</span> <span class="n">con</span><span class="o">-</span><span class="n">name</span> <span class="s1">&#39;接続プロファイル名&#39;</span>
+
+<span class="c1"># nmcli c a type ethernet ifname enp5s0 con-name eth1</span>
+</pre></div>
+</div>
+<p>※　これで /etc/sysconfig/network-scripts に ifcfg-eth1 というファイルが作成される。</p>
+</section>
+<section id="id8">
+<h3>接続プロファイル削除<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">delete</span> <span class="s1">&#39;接続プロファイル名&#39;</span>
+
+<span class="c1"># nmcli c d eth0</span>
+</pre></div>
+</div>
+</section>
+<section id="ip">
+<h3>IPレイヤ環境の設定<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>IPアドレスの設定</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">modify</span> <span class="s1">&#39;接続プロファイル名&#39;</span> <span class="n">ipv4</span><span class="o">.</span><span class="n">method</span> <span class="n">manual</span> <span class="n">ipv4</span><span class="o">.</span><span class="n">addresses</span> <span class="n">IPアドレス</span><span class="o">/</span><span class="n">ネットマスク</span>
+
+<span class="c1"># nmcli c m eth0 ipv4.method manual ipv4.addresses 192.168.1.2/24</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ゲートウェイの設定</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">modify</span> <span class="s1">&#39;接続プロファイル名&#39;</span> <span class="n">ipv4</span><span class="o">.</span><span class="n">gateway</span> <span class="s1">&#39;ゲートウェイアドレス&#39;</span>
+
+<span class="c1"># nmcli c m eth0 ipv4.gateway 192.168.1.1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>DNSサーバの設定</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">modify</span> <span class="s1">&#39;接続プロファイル名&#39;</span> <span class="n">ipv4</span><span class="o">.</span><span class="n">dns</span> <span class="s1">&#39;DNSサーバのアドレス&#39;</span>
+
+<span class="c1"># nmcli c m eth0 ipv4.dns 192.168.1.1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>自動接続の設定</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmcli</span> <span class="n">connection</span> <span class="n">modify</span> <span class="s1">&#39;接続プロファイル名&#39;</span> <span class="n">connection</span><span class="o">.</span><span class="n">autoconnect</span> <span class="n">yes</span>
+
+<span class="c1"># nmcli c m eth0 connection.autoconnect yes</span>
+</pre></div>
+</div>
+</section>
+<section id="network-scripts">
+<h3>network-scripts確認<a class="headerlink" href="#network-scripts" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ls -l /etc/sysconfig/network-scripts/ifcfg-*</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">308</span>  <span class="mi">6</span><span class="n">月</span> <span class="mi">11</span> <span class="mi">10</span><span class="p">:</span><span class="mi">26</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">network</span><span class="o">-</span><span class="n">scripts</span><span class="o">/</span><span class="n">ifcfg</span><span class="o">-</span><span class="n">enp0s3</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">254</span>  <span class="mi">5</span><span class="n">月</span> <span class="mi">22</span>  <span class="mi">2020</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">network</span><span class="o">-</span><span class="n">scripts</span><span class="o">/</span><span class="n">ifcfg</span><span class="o">-</span><span class="n">lo</span>
+
+<span class="c1"># cat /etc/sysconfig/network-scripts/ifcfg-enp0s3</span>
+<span class="n">TYPE</span><span class="o">=</span><span class="n">Ethernet</span>
+<span class="n">PROXY_METHOD</span><span class="o">=</span><span class="n">none</span>
+<span class="n">BROWSER_ONLY</span><span class="o">=</span><span class="n">no</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
+<span class="n">DEFROUTE</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="o">=</span><span class="n">no</span>
+<span class="n">IPV6INIT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV6_AUTOCONF</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV6_DEFROUTE</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="o">=</span><span class="n">no</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="o">=</span><span class="n">stable</span><span class="o">-</span><span class="n">privacy</span>
+<span class="n">NAME</span><span class="o">=</span><span class="n">enp0s3</span>                                       <span class="n">接続名</span>
+<span class="n">UUID</span><span class="o">=</span><span class="n">e08ab9aa</span><span class="o">-</span><span class="mi">6</span><span class="n">ae3</span><span class="o">-</span><span class="mi">496</span><span class="n">b</span><span class="o">-</span><span class="mi">80</span><span class="n">a6</span><span class="o">-</span><span class="mi">13</span><span class="n">b7af76b852</span>
+<span class="n">DEVICE</span><span class="o">=</span><span class="n">enp0s3</span>　　　　　　　　　　　　　　　　　　　<span class="n">デバイス名</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">IPADDR</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">2.5</span>
+<span class="n">PREFIX</span><span class="o">=</span><span class="mi">24</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2>IPネットワークレイヤの操作<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<section id="network-centos6-centos7">
+<h3>NETWORKコマンド(CentOS6/CentOS7)<a class="headerlink" href="#network-centos6-centos7" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>(CentOS6)
+#net-tools</p></th>
+<th class="head"><p>(CentOS7)
+#iproute2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ifconfig</p></td>
+<td><p>ip a(addr), ip l(link)</p></td>
+</tr>
+<tr class="row-odd"><td><p>route</p></td>
+<td><p>ip r(route)</p></td>
+</tr>
+<tr class="row-even"><td><p>netstat</p></td>
+<td><p>ss</p></td>
+</tr>
+<tr class="row-odd"><td><p>netstat -i</p></td>
+<td><p>ip -s l(link)</p></td>
+</tr>
+<tr class="row-even"><td><p>arp</p></td>
+<td><p>ip n(neighbor)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id10">
+<h3>リンク状態の確認<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip a show dev eth0</span>
+<span class="mi">2</span><span class="p">:</span> <span class="n">eth0</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1500</span> <span class="n">qdisc</span> <span class="n">pfifo_fast</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">qlen</span> <span class="mi">1000</span>
+    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">52</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="mi">32</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+    <span class="n">inet</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.70</span><span class="o">/</span><span class="mi">24</span> <span class="n">brd</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.255</span> <span class="n">scope</span> <span class="k">global</span> <span class="n">eth0</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+    <span class="n">inet6</span> <span class="n">fe80</span><span class="p">::</span><span class="mi">5054</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">fe41</span><span class="p">:</span><span class="n">c632</span><span class="o">/</span><span class="mi">64</span> <span class="n">scope</span> <span class="n">link</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>リンクの接続と切断<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip l set eth1 up</span>
+<span class="c1"># ip l set eth1 down</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>ルーティングテーブルの確認<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip r</span>
+<span class="n">default</span> <span class="n">via</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.1</span> <span class="n">dev</span> <span class="n">eth0</span>  <span class="n">proto</span> <span class="n">static</span>  <span class="n">metric</span> <span class="mi">1024</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">122.0</span><span class="o">/</span><span class="mi">24</span> <span class="n">dev</span> <span class="n">eth0</span>  <span class="n">proto</span> <span class="n">kernel</span>  <span class="n">scope</span> <span class="n">link</span>  <span class="n">src</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.70</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">122.0</span><span class="o">/</span><span class="mi">24</span> <span class="n">dev</span> <span class="n">eth1</span>  <span class="n">proto</span> <span class="n">kernel</span>  <span class="n">scope</span> <span class="n">link</span>  <span class="n">src</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.69</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>デフォルトゲートウェイの追加、削除<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip route add default via 192.168.122.1</span>
+<span class="c1"># ip route del default via 192.168.122.1</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>デバイスごとのパケット処理数<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip -s l</span>
+<span class="mi">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">LOOPBACK</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">65536</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UNKNOWN</span> <span class="n">mode</span> <span class="n">DEFAULT</span>
+    <span class="n">link</span><span class="o">/</span><span class="n">loopback</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">brd</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+    <span class="n">RX</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="n">packets</span>  <span class="n">errors</span>  <span class="n">dropped</span> <span class="n">overrun</span> <span class="n">mcast</span>
+    <span class="mi">82260</span>      <span class="mi">1040</span>     <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>
+    <span class="n">TX</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="n">packets</span>  <span class="n">errors</span>  <span class="n">dropped</span> <span class="n">carrier</span> <span class="n">collsns</span>
+    <span class="mi">82260</span>      <span class="mi">1040</span>     <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>
+<span class="mi">2</span><span class="p">:</span> <span class="n">eth0</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1500</span> <span class="n">qdisc</span> <span class="n">pfifo_fast</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">mode</span> <span class="n">DEFAULT</span> <span class="n">qlen</span> <span class="mi">1000</span>
+    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">52</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="mi">32</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+    <span class="n">RX</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="n">packets</span>  <span class="n">errors</span>  <span class="n">dropped</span> <span class="n">overrun</span> <span class="n">mcast</span>
+    <span class="mi">3861081</span>    <span class="mi">6396</span>     <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>
+    <span class="n">TX</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="n">packets</span>  <span class="n">errors</span>  <span class="n">dropped</span> <span class="n">carrier</span> <span class="n">collsns</span>
+    <span class="mi">237222</span>     <span class="mi">1733</span>     <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>
+<span class="mi">3</span><span class="p">:</span> <span class="n">eth1</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1500</span> <span class="n">qdisc</span> <span class="n">pfifo_fast</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">mode</span> <span class="n">DEFAULT</span> <span class="n">qlen</span> <span class="mi">1000</span>
+    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">52</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="n">a2</span><span class="p">:</span><span class="n">e8</span><span class="p">:</span><span class="mi">73</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+    <span class="n">RX</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="n">packets</span>  <span class="n">errors</span>  <span class="n">dropped</span> <span class="n">overrun</span> <span class="n">mcast</span>
+    <span class="mi">1478655</span>    <span class="mi">2098</span>     <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>
+    <span class="n">TX</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="n">packets</span>  <span class="n">errors</span>  <span class="n">dropped</span> <span class="n">carrier</span> <span class="n">collsns</span>
+    <span class="mi">20043</span>      <span class="mi">126</span>      <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="tcp">
+<h3>TCPソケットの状態確認<a class="headerlink" href="#tcp" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ss -nat</span>
+<span class="n">State</span>      <span class="n">Recv</span><span class="o">-</span><span class="n">Q</span> <span class="n">Send</span><span class="o">-</span><span class="n">Q</span>        <span class="n">Local</span> <span class="n">Address</span><span class="p">:</span><span class="n">Port</span>          <span class="n">Peer</span> <span class="n">Address</span><span class="p">:</span><span class="n">Port</span>
+<span class="n">LISTEN</span>     <span class="mi">0</span>      <span class="mi">100</span>               <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">25</span>                       <span class="o">*</span><span class="p">:</span><span class="o">*</span>
+<span class="n">LISTEN</span>     <span class="mi">0</span>      <span class="mi">128</span>                       <span class="o">*</span><span class="p">:</span><span class="mi">22</span>                       <span class="o">*</span><span class="p">:</span><span class="o">*</span>
+<span class="n">ESTAB</span>      <span class="mi">0</span>      <span class="mi">0</span>            <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.70</span><span class="p">:</span><span class="mi">22</span>           <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.1</span><span class="p">:</span><span class="mi">34328</span>
+<span class="n">LISTEN</span>     <span class="mi">0</span>      <span class="mi">100</span>                     <span class="p">::</span><span class="mi">1</span><span class="p">:</span><span class="mi">25</span>                      <span class="p">:::</span><span class="o">*</span>
+<span class="n">LISTEN</span>     <span class="mi">0</span>      <span class="mi">128</span>                      <span class="p">:::</span><span class="mi">80</span>                      <span class="p">:::</span><span class="o">*</span>
+<span class="n">LISTEN</span>     <span class="mi">0</span>      <span class="mi">128</span>                      <span class="p">:::</span><span class="mi">22</span>                      <span class="p">:::</span><span class="o">*</span>
+</pre></div>
+</div>
+</section>
+<section id="arp">
+<h3>ARPテーブルの確認<a class="headerlink" href="#arp" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip n</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">122.71</span> <span class="n">dev</span> <span class="n">eth0</span> <span class="n">lladdr</span> <span class="mi">52</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="n">a5</span><span class="p">:</span><span class="mi">2</span><span class="n">c</span><span class="p">:</span><span class="mi">75</span> <span class="n">REACHABLE</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">122.1</span> <span class="n">dev</span> <span class="n">eth0</span> <span class="n">lladdr</span> <span class="mi">02</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">97</span><span class="p">:</span><span class="n">c1</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="n">ec</span> <span class="n">REACHABLE</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../1.chapter/basic_syntax.html" class="btn btn-neutral float-right" title="This page is about Basic syntax" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="CentOS7 manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, devg1120.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -11,6 +11,7 @@ CentOS7 manual
    :maxdepth: 2
    :caption: 目次
 
+   _1.chapter/network
    1.chapter/basic_syntax
    1.chapter/roles
    2.chapter/directive
